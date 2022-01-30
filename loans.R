@@ -3,7 +3,7 @@ library(janitor)
 library(readr)
 library(tidyr)
 library(dplyr)
-library(ggplt2)
+library(ggplot2)
 
 loans = read_csv("data/loans.csv")
 head(loans)
