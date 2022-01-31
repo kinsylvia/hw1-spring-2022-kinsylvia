@@ -139,7 +139,8 @@ print(min_balance.head())
 # join with the original table
 join10=join9.merge(min_balance,left_on='account_id',right_on='account_id',how='left')
 print(join10.head())
-join10=join10.drop(['district_id','date_x','Unnamed: 0','id','date_y'],axis=1)
-join10.to_csv("analytical_py.csv")
+join10=join10.rename(columns={'date_x':"open_date"})
+join10=join10.drop(['district_id','Unnamed: 0','id','date_y'],axis=1)
 
+join10.to_csv("analytical_py.csv")
 
