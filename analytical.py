@@ -8,7 +8,7 @@ accounts=pd.read_csv("data/accounts.csv")
 accounts=pd.DataFrame(accounts)
 print(accounts.head())
 
-## --------------- 1.2.3 now we have account_id, open_date, statement_frequency.
+## --------------- now we have 1. account_id, 2. open_date, 3. statement_frequency.
 print(accounts.dtypes)
 
 
@@ -139,7 +139,7 @@ print(min_balance.head())
 # join with the original table
 join10=join9.merge(min_balance,left_on='account_id',right_on='account_id',how='left')
 print(join10.head())
-
+join10=join10.drop(['district_id','date_x','Unnamed: 0','id','date_y'],axis=1)
 join10.to_csv("analytical_py.csv")
 
 
