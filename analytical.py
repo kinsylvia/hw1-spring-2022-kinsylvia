@@ -56,7 +56,7 @@ size_cards=cards_links.groupby('id_x',as_index=False).agg({'id_y':'count'}).rena
 join_ccards=links.merge(size_cards,left_on='id',right_on='link_id',how='outer')
 print(join_ccards)
 
-
+# remove duplicates
 join_ccards=join_ccards.drop_duplicates(['account_id'])
 
 
@@ -75,7 +75,7 @@ join5=join4.merge(loans,left_on='account_id',right_on='account_id',how='left')
 join5['loan']=join5['id'].isna().map({True:"F",False:'T'})
 print(join5.head())
 
-# rename to get loan_amount, loan_payments
+# rename to get loan_amount, loan_payments, loan_term, loan_status
 join5=join5.rename(columns={'amount':'loan_amount'})
 join5=join5.rename(columns={'payments':'loan_payments'})
 join5=join5.rename(columns={'month':'loan_term'})
@@ -85,6 +85,8 @@ join5=join5.rename(columns={'status':'loan_status'})
 join5['loan_default']=np.nan
 join5['loan_default'][(join5['loan_status'] == 'A')] ='F'
 join5['loan_default'][(join5['loan_status'] == 'C')] ='F'
+join5['loan_default'][(join5['loan_status'] == 'B')] ='T'
+join5['loan_default'][(join5['loan_status'] == 'D')] ='T'
 
 print(join5.head())
 
